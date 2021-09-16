@@ -83,4 +83,9 @@ export class SearchesService {
       })
     );
   }
+
+  globalSearch(term: string) {
+    const url = `${baseUrl}/todo/${term}`;
+    return this.http.get(url, this.headers);
+  }
 }
