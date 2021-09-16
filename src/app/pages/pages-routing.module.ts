@@ -14,6 +14,8 @@ import { UsersComponent } from './maintenances/users/users.component';
 import { HospitalsComponent } from './maintenances/hospitals/hospitals.component';
 import { MedicsComponent } from './maintenances/medics/medics.component';
 import { MedicComponent } from './maintenances/medics/medic.component';
+import { SearchesComponent } from './searches/searches.component';
+import { AdminGuard } from '../guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -23,9 +25,9 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent, data: { title: 'Dashboard' } },
       {
-        path: 'progress',
-        component: ProgressComponent,
-        data: { title: 'Progreso' },
+        path: 'account-settings',
+        component: AccountSettingsComponent,
+        data: { title: 'Ajustes de tema' },
       },
       {
         path: 'grafica1',
@@ -33,9 +35,14 @@ const routes: Routes = [
         data: { title: 'Gráficas' },
       },
       {
-        path: 'account-settings',
-        component: AccountSettingsComponent,
-        data: { title: 'Ajustes de tema' },
+        path: 'profile',
+        component: ProfileComponent,
+        data: { title: 'Perfil de usuario' },
+      },
+      {
+        path: 'progress',
+        component: ProgressComponent,
+        data: { title: 'Progreso' },
       },
       {
         path: 'promises',
@@ -44,17 +51,12 @@ const routes: Routes = [
       },
       { path: 'rxjs', component: RxjsComponent, data: { title: 'RxJs' } },
       {
-        path: 'profile',
-        component: ProfileComponent,
-        data: { title: 'Perfil de usuario' },
+        path: 'search/:term',
+        component: SearchesComponent,
+        data: { title: 'Búsqueda' },
       },
 
       // Mantenimiento
-      {
-        path: 'users',
-        component: UsersComponent,
-        data: { title: 'Usuario de aplicación' },
-      },
       {
         path: 'hospitals',
         component: HospitalsComponent,
@@ -69,6 +71,14 @@ const routes: Routes = [
         path: 'medics/:id',
         component: MedicComponent,
         data: { title: 'Médico' },
+      },
+
+      // Rutas del admin
+      {
+        path: 'users',
+        canActivate: [AdminGuard],
+        component: UsersComponent,
+        data: { title: 'Usuario de aplicación' },
       },
     ],
   },

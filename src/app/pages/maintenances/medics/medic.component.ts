@@ -52,7 +52,7 @@ export class MedicComponent implements OnInit {
 
     this.medicService
       .getMedicById(id)
-      .pipe(delay(10))
+      .pipe(delay(100))
       .subscribe((medico) => {
         if (!medico) {
           return this.router.navigate(['dashboard', 'medics']);
